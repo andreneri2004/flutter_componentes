@@ -7,24 +7,20 @@ class CardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text('Cards'),
       ),
       body: ListView(
-
-        padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         children: const [
-
-          Card2(),
-          Card2(),
-          Card2()
+          Card2(text: 'BI- PHP' , imageUrl: 'https://becode.com.br/wp-content/uploads/2017/09/php-post-1.png'),
+          SizedBox(height: 10),
+          Card2(text: 'BI- FLUTTER' , imageUrl: 'https://www.alura.com.br/artigos/assets/flutter/o-que-e-flutter.jpg'),
+          SizedBox(height: 10),
+          Card2( ),
         ],
       ),
     );
   }
 }
-
-
-
-
