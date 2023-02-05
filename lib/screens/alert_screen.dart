@@ -1,5 +1,8 @@
-import 'package:componentes/screens/screen.dart';
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class AlertScreen extends StatefulWidget {
   const AlertScreen({Key? key}) : super(key: key);
@@ -9,7 +12,40 @@ class AlertScreen extends StatefulWidget {
 }
 
 class _AlertScreenState extends State<AlertScreen> {
-  void displayDialog(BuildContext context){
+
+
+  void displayDialogIOS(BuildContext context){
+
+    showCupertinoDialog(
+      barrierDismissible: false,
+        context: context,
+        builder: (context){
+          return CupertinoAlertDialog(
+            title:  const Text('Título'),
+            content: Column(
+              children: const [
+                Text('Desenvolvedor Flutter'),
+                SizedBox(height: 10),
+                FlutterLogo(size: 100,)
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: ()=> Navigator.pop(context),
+                child: const Text('Cancelar', style: TextStyle(color: Colors.red),),
+              ),
+              TextButton(
+                onPressed: ()=> Navigator.pop(context),
+                child: const Text('Cancelar'),
+              ),
+            ],
+          );
+        }
+    );
+
+  }
+
+  void displayDialogAndroid(BuildContext context){
     showDialog(
        barrierDismissible: false, // serve para não sair quando aperta fora da caixa
         context: context,
@@ -29,7 +65,11 @@ class _AlertScreenState extends State<AlertScreen> {
             actions: [
               TextButton(
                   onPressed: ()=> Navigator.pop(context),
-                  child: const Text('Cancelar'),
+                  child: const Text('Ok'),
+              ),
+              TextButton(
+                onPressed: ()=> Navigator.pop(context),
+                child: const Text('Cancelar', style: TextStyle(color: Colors.red),),
               ),
             ],
           );
@@ -42,7 +82,7 @@ class _AlertScreenState extends State<AlertScreen> {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          onPressed: () => displayDialog(context),
+          onPressed: () => Platform.isAndroid ? displayDialogAndroid(context) : displayDialogIOS(context),
           child: const Padding(
             padding: EdgeInsets.all(10),
             child: Text(
